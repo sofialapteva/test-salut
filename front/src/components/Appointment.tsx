@@ -14,7 +14,7 @@ export function Appointment() {
     date.setHours(9)
     date.setMinutes(0)
     date.setSeconds(0)
-    let dates = new Array(105);
+    let dates = new Array(100);
     dates[0] = date;
     dates = dates.map((el, i)=>{
       if (+el.getHours()*+el.getMinutes()<510){
@@ -35,7 +35,7 @@ export function Appointment() {
   }, [])
   async function handleAppointment(e:any){
     e.preventDefault()
-    await fetch('http://localhost:3001/', {
+    const req = await fetch('http://localhost:3001/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'},
@@ -46,8 +46,11 @@ export function Appointment() {
         issues: e.target.issues.value,
       })
     })
-    alert('Вы записались на приём')
-    document.location.href='/'
+    const res = await req.json()
+    alert(res)
+    if (res==='Успешная запись'){
+      document.location.href='/'
+    } 
   }
   return (
       <form onSubmit={(e)=>handleAppointment(e)} className='h-72 flex justify-around flex-col mx-auto'>
