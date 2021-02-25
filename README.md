@@ -1,6 +1,12 @@
 Запуск:
-папка back: node server.js
-папка front: yarn start
+
+папка back: 
+1.npm i
+2.node server.js
+
+папка front: 
+1. npm i
+2. yarn start
 
 Задание:
 Необходимо реализовать сайт для записи в клинику и разместить его в публичном
