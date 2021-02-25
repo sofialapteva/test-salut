@@ -37,6 +37,19 @@ export function Timetable() {
     const res = await req.json()
     setAppoinments(res)
   }
+  async function deleteAppointment (data:any) {
+    const req = await fetch('http://localhost:3001/appointments', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        doctor: data.doctor,
+        time: data.time,
+      })
+    })
+    const res = await req.json()
+    setAppoinments(res)
+  }
   return (
     <div className='flex justify-start flex-col mx-auto'>
       <h2 className='text-2xl text-center'>Расписание врача</h2>
@@ -62,6 +75,7 @@ export function Timetable() {
           <p>Пациент: {data.name}</p>
           <p>Время: {data.time}</p>
           <p>Жалобы: {data.issues?data.issues:'Нет'}</p>
+          <button className='bg-green-200 p-1' onClick={()=>deleteAppointment(data)}>Удалить запись</button>
         </section>
       )}) : 'Записей нет'}
     </div>

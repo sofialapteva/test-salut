@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors')
 const app = express()
 
-const db = []
+let db = []
 app.use(express.json())
 app.use('/', express.static('img'))
 app.use(cors())
@@ -24,6 +24,14 @@ app.post('/appointments', (req, res) => {
   const query = db.filter(el =>
     el.doctor === req.body.doctor && el.time.split(',')[0] === req.body.date
   )
+  res.json(query)
+})
+
+app.delete('/appointments', (req, res) => {
+  const query = db.filter(el =>
+    el.doctor === req.body.doctor && el.time !== req.body.time
+  )
+  db = db.filter(el => el.doctor !== req.body.doctor || el.doctor === req.body.doctor && el.time !== req.body.time)
   res.json(query)
 })
 
