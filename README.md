@@ -2,7 +2,7 @@
 
 папка back: 
 1.npm i
-3.node server.js
+2.node server.js
 
 папка front: 
 1. npm i
